@@ -20,7 +20,7 @@ const order = {
     "Firmness",
     "Sugar",
     "Acidity",
-    "Yellowness",
+    "HarvestTime",
   ],
 };
 

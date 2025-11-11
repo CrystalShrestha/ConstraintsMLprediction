@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Fruits — Apple & Banana (ONNX in Browser)</title>
+  <title>Fruits Data</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
 </head>
 <body>
 <header>
-  <h1>Fruits — Apple & Banana (PyTorch → ONNX → Browser)</h1>
-  <p>Inputs have built-in min/max checks. Serve via localhost or GitHub Pages (not file:///).</p>
+  <h1>Fruits — Apple & Banana Prediction
+  </h1>
 </header>
 
 <main>
@@ -91,21 +91,22 @@
       </div>
       <!-- Placeholder sixth feature so the UI has 6; rename data-name and label later to your real feature -->
       <div class="inputbox">
-        <label for="b_feat6">Yellowness</label>
-        <input id="b_feat6" data-name="Yellowness" type="number" required step="0.1" min="0" max="10" value="1.0">
+        <label for="b_feat6">HarvestTime (days)
+        </label>
+        <input id="b_feat6" data-name="HarvestTime" type="number" required step="0.1" min="0" max="10" value="1.0">
       </div>
     </form>
 
     <pre id="out">Loading models…</pre>
   </section>
 
-  <section class="card">
+  <!-- <section class="card">
     <h2>Notes</h2>
     <ul>
       <li>If the app shows a “Note: …” line, it auto-matched the model’s input size (padded/truncated or identity scaling).</li>
       <li>Serve via a local server or GitHub Pages so fetch() works.</li>
     </ul>
-  </section>
+  </section> -->
 </main>
 
 <footer><small>GitHub Pages · onnxruntime-web</small></footer>
