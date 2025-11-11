@@ -1,61 +1,3 @@
-<!-- <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <title>Fruits — Apple & Banana (ONNX in Browser)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
-</head>
-<body>
-  <header>
-    <h1>Fruits — Apple & Banana (PyTorch → ONNX → Browser)</h1>
-    <p>Pick a task, enter features, run in your browser via onnxruntime-web.</p>
-  </header>
-
-  <main>
-    <section class="card">
-      <h2>Task</h2>
-      <div class="toolbar">
-        <label>
-          Fruit & Model
-          <select id="task">
-            <option value="apple_reg">🍎 Apple — Regression (Weight)</option>
-            <option value="apple_clf">🍎 Apple — Classification (Quality)</option>
-            <option value="banana_clf">🍌 Banana — Classification (Quality)</option>
-          </select>
-        </label>
-        <label id="thrwrap" style="display:none">
-          Threshold <span id="thv">0.50</span>
-          <input id="thr" type="range" min="0" max="1" step="0.01" value="0.5">
-        </label>
-        <div class="buttons">
-          <button id="btnPredict">Predict</button>
-          <button id="btnReset" class="ghost">Reset</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>Inputs</h2>
-      <div id="inputs" class="grid"></div>
-      <pre id="out">Loading assets…</pre>
-    </section>
-
-    <section class="card">
-      <h2>About</h2>
-      <ul>
-        <li>Apple preprocessing: <code>assets/apple.json</code> (feature order + mean/std, and classes for quality).</li>
-        <li>Banana preprocessing: <code>assets/banana.json</code> (feature order + mean/std + classes).</li>
-        <li>Models: <code>models/apple_weight_regressor.onnx</code>, <code>models/apple_quality_classifier.onnx</code>, <code>models/banana_quality_classifier.onnx</code>.</li>
-      </ul>
-    </section>
-  </main>
-
-  <footer><small>GitHub Pages · onnxruntime-web</small></footer>
-  <script src="app.js"></script>
-</body>
-</html> -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -68,7 +10,7 @@
 <body>
 <header>
   <h1>Fruits — Apple & Banana (PyTorch → ONNX → Browser)</h1>
-  <p>All inputs below have built-in min/max checks.</p>
+  <p>Inputs have built-in min/max checks. Serve via localhost or GitHub Pages (not file:///).</p>
 </header>
 
 <main>
@@ -78,7 +20,6 @@
       <label>Model
         <select id="task">
           <option value="apple_reg">🍎 Apple — Regression (Weight)</option>
-          <!-- <option value="apple_clf">🍎 Apple — Classification (Quality)</option> -->
           <option value="banana_clf">🍌 Banana — Classification (Quality)</option>
         </select>
       </label>
@@ -90,7 +31,7 @@
 
       <div class="buttons">
         <button id="btnPredict" disabled>Predict</button>
-        <button id="btnReset" class="ghost">Reset</button>
+        <button id="btnReset" class="ghost" type="button">Reset</button>
       </div>
     </div>
   </section>
@@ -98,9 +39,8 @@
   <section class="card">
     <h2>Inputs</h2>
 
-    <!-- APPLE FORM (edit names and limits to your columns) -->
+    <!-- APPLE FORM (6 features) -->
     <form id="form_apple" class="grid">
-      <!-- Example fields — replace with your real feature names/limits -->
       <div class="inputbox">
         <label for="a_size">Size (cm)</label>
         <input id="a_size" data-name="Size" type="number" required step="0.1" min="3" max="12" value="6.0">
@@ -127,9 +67,8 @@
       </div>
     </form>
 
-    <!-- BANANA FORM (edit names and limits to your columns) -->
+    <!-- BANANA FORM (now 6 features; last is a placeholder until you know the real 6th) -->
     <form id="form_banana" class="grid" style="display:none">
-      <!-- Example fields — replace with your real feature names/limits -->
       <div class="inputbox">
         <label for="b_diam">Diameter (cm)</label>
         <input id="b_diam" data-name="Diameter" type="number" required step="0.1" min="2.0" max="5.0" value="3.6">
@@ -150,6 +89,11 @@
         <label for="b_acid">Acidity (pH)</label>
         <input id="b_acid" data-name="Acidity" type="number" required step="0.01" min="3.0" max="5.5" value="4.2">
       </div>
+      <!-- Placeholder sixth feature so the UI has 6; rename data-name and label later to your real feature -->
+      <div class="inputbox">
+        <label for="b_feat6">Yellowness</label>
+        <input id="b_feat6" data-name="Yellowness" type="number" required step="0.1" min="0" max="100" value="0">
+      </div>
     </form>
 
     <pre id="out">Loading models…</pre>
@@ -158,8 +102,8 @@
   <section class="card">
     <h2>Notes</h2>
     <ul>
-      <li>Fields use <code>required</code>, <code>min</code>, <code>max</code>, <code>step</code> to prevent bad input.</li>
-      <li>Edit labels and limits to match your dataset columns.</li>
+      <li>If the app shows a “Note: …” line, it auto-matched the model’s input size (padded/truncated or identity scaling).</li>
+      <li>Serve via a local server or GitHub Pages so fetch() works.</li>
     </ul>
   </section>
 </main>
