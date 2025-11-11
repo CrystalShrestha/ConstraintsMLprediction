@@ -31,7 +31,7 @@ const stats = {
   },
   // For banana, if these don't match length 6 or exact order, code will use identity scaling (mean=0, scale=1)
   banana_clf: {
-    mean: [3.6, 18.2, 42.0, 15.5, 4.2, 0.0],
+    mean: [3.6, 18.2, 42.0, 15.5, 4.2, 1.0],
     scale: [0.4, 2.1, 8.0, 3.0, 0.5, 1.0],
     classes: ["bad", "good"],
   },
